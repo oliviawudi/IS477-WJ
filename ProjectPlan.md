@@ -31,7 +31,7 @@ Role
 
 
 Responsibility
-1. Collect two datasets from the website called “Board of Governors of the Federal Reserve System” of the section called “Survey of Household Economics and Decisionmaking” in a JSON file for the year of the survey 2020 during COVID-19, and a comma separated values (CSV) file for 2024. 
+1. Collect two datasets from the website called “Board of Governors of the Federal Reserve System” of the section called “Survey of Household Economics and Decisionmaking” in a SAS file for the year of the survey 2020 during COVID-19, and a comma separated values (CSV) file for 2024. 
 
 2. Clean the dataset considering the missing values, rename the columns into meaningful names, outliers, syntactic or semantic terms.
 
@@ -66,7 +66,7 @@ Workflow automation ensuring entire process from raw data import to final analys
 
 We are utilizing two large-scale datasets from the Federal Reserve’s Survey of Household Economics and Decisionmaking (SHED), one from 2020 during COVID-19 and another from 2024. 
 It reflects the pandemic economic environment. Thse datasets contain valuable information about household financial conditions, spending habits, credit usage, and overall decision-making behaviors. 
-To enable direct comparison, we will aggregate the two datasets into a single integrated file, clearly distinguishing records by year to track temporal changes. The 2020 SHED dataset will be imported in CSV format, while the 2024 dataset will be obtained in JSON format, allowing us to demonstrate how different data structures can be merged and anlyzed together.
+To enable direct comparison, we will aggregate the two datasets into a single integrated file, clearly distinguishing records by year to track temporal changes. The 2020 SHED dataset will be imported in CSV format, while the 2024 dataset will be obtained in SAS format, allowing us to demonstrate how different data structures can be merged and anlyzed together.
 
 **Survey of Household Economics and Decision-making**
 
