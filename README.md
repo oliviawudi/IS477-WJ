@@ -2,7 +2,6 @@
 
 
 # Data Lifecycle
-
 ## 1. Plan
 - Defined the core research questions, focusing on relationship between **financial literacy** and **household credit card debt changed between the year 2020 during COVID-19 and 2024 after that term.
 
@@ -13,8 +12,6 @@
 - Identified key concepts of financial literacy, credit card debt, incomme, and risk category for the variables we expect to extract and derive.
 
 - Assigned roles and responsibilities.
-
-
 ## 2. Collect / Acquire
 We obtain data from original source in: https://www.federalreserve.gov/consumerscommunities/shed_data.htm 
 
