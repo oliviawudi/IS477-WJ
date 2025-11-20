@@ -26,12 +26,12 @@ Wenqi
 
 
 
-Contributions
+## 4. Contributions
 
 Jun	
 
 
-Wenqi
+## Wenqi
 ## Ethical Data Handling
 We will identify all ethical, legal, or policy constraints and how they were addressed. This project will integrate multiple datasets, including the Federal Reserve's SHED data (2020 & 2024) and the external credit volume indicator from the Consumer Financial Protection Bureau. Because these data contain sensitive consumer socioeconomic information, our data handling process would be guided by Consent, Privacy, Confidentiality, Copyright, and Terms of Use. 
 1.	Consent & Human Subject Consideration
