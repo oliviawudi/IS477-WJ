@@ -1,5 +1,5 @@
 # Updates 
-## 1. Project Pan
+## 1. Project Pan (Based on Feedback)
 To address feedback encouraging integration of our data from multiple sources, we expanded our project by adding an external dataset from the Consumer Financial Protection Bureau (CFPB). Unlike the Federal Reserve’s SHED data, which mostly captures household-level experiences and perceptions, the CFPB dataset would provide macro-level indicators, including things like monthly trends in credit card originations, inquiries, and borrowing activity. 
 This new dataset will allow us to enrich SHED respondents’ financial experiences with contextual information about the broader credit environment. Adding the CFPB dataset introduces some challenges in the data integration process, which strengthens the methodological rigor of our project. 
 ## 2. Timeline
