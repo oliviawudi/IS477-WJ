@@ -36,7 +36,7 @@ Release to GitHub of the completed project
 
 ## 3. Contributions Task
 
-### **Jun**	
+## **Jun**	
 After submitting the Project Plan, we received feedback regarding the aggregation of the SHED dataset across different years. They wanted us to have a challenging experience of data management through this final project. 
 We decided to find another dataset that aligns with our research question of credit card status, specifically the CFPB Consumer Credit Trends dataset. So I added its dataset in our data lifecycle on the plan and collect/acquire section for its update. 
 Considering our feedback, we searched the dataset for more information about credit card behavior, and we reached the government dataset of Consumer Credit Trends. We decided to aggregate on the lending levels of credit card risk that describe the credit card limit volume that the bank distributed by credit score status group. 
@@ -45,7 +45,7 @@ Building the pipeline of our final project in our introduction page  of our GitH
 
 For the data quality, I dive into SHED and CFPB datasets, exploring each rows and features by Google Colab describing their information in details. I have found the data quality of fitness for use:
 
-**SHED 2024**
+### **SHED 2024**
 
 For completeness, there were no explicit missing values in the selected values considered by the research question. However, the implicit missing values were found on the EF2 feature with an empty string in over 50%. I decided to drop that feature to preserve its representative dataset. Also, I found there was 15% on the C4A feature and dropped those missing values of rows due to less percentage. 
 
@@ -75,7 +75,7 @@ For syntactic accuracy, most of the binary surveys of features answered yes or n
 
 The 1,948 rows were removed and EF2 feature were dropped due to implicit missing values. 
 
-**SHED 2020**
+### **SHED 2020**
 
 There were format differences compare to the 2024 dataset that it formed as numeric 0.0 of no, 1.0 of yes, and -1.0 of  refused to response.
 The completeness was described with C4A that it had 13.8% of implicit missing values and we dropped those rows. Several variables were used -1 indicating refusal of  response. We removed those rows due to low percentage of the entire data. 
@@ -86,7 +86,8 @@ For Syntactic, many features are stored incorrectly as 0., 1. Instead of 0.0 or 
 
 Total of 1,711 rows were dropped with all syntactic inconsistencies corrected. 
 
-**CFPB**
+### **CFPB**
+
 There are 1100 rows and 5 columns. The rows represents how much volumes of credit card released from the bank in each group of credit score. The each feature represents:
 
 - month - Months obervation count from 2000 Jan.
@@ -114,7 +115,7 @@ For syntactic, the numeric features of month, vol, and vol_unadj have correct ty
 There were no rows dropped. The dataset did not require cleaning, only interpretation.
 
 
-### Wenqi
+## Wenqi
 
 ## Ethical Data Handling
 We will identify all ethical, legal, or policy constraints and how they were addressed. This project will integrate multiple datasets, including the Federal Reserve's SHED data (2020 & 2024) and the external credit volume indicator from the Consumer Financial Protection Bureau. Because these data contain sensitive consumer socioeconomic information, our data handling process would be guided by Consent, Privacy, Confidentiality, Copyright, and Terms of Use. 
