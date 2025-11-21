@@ -55,14 +55,14 @@ Financial Literacy
 - EF1 — Has emergency savings
 - EF2 — Ability to cover 3 months if income is lost
 - EF3 - Suppose that you have an emergency expense that costs $400. Based on your current financial situation, how would you pay for this expense?
-- EF3_a — Put it on my credit card and pay it off in full at the next statement
-- EF3_b — Put it on my credit card and pay it off over time
-- EF3_c — With the money currently in my checking/savings account or with cash
-- EF3_d — Using money from a bank loan or line of credit
-- EF3_e — By borrowing from a friend or family member
-- EF3_f — Using a payday loan, deposit advance, or overdraft
-- EF3_g — By selling something
-- EF3_h — I wouldn't be able to pay for the expense right now
+  - EF3_a — Put it on my credit card and pay it off in full at the next statement
+  - EF3_b — Put it on my credit card and pay it off over time
+  - EF3_c — With the money currently in my checking/savings account or with cash
+  - EF3_d — Using money from a bank loan or line of credit
+  - EF3_e — By borrowing from a friend or family member
+  - EF3_f — Using a payday loan, deposit advance, or overdraft
+  - EF3_g — By selling something
+  - EF3_h — I wouldn't be able to pay for the expense right now
 
 We tested for logical contradictions. People who answered yes for EF2 with answering no for EF3, we found 3 cases and removed 3 rows considering the contradiction. Additionally, we check the contradiction between C2A and C4A. There was no contradiction that nobody without a credit card reported credit card repayment behavior. 
 
