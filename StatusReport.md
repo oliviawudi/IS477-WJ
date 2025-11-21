@@ -41,6 +41,7 @@ Building the pipeline of our final project in our introduction page  of our GitH
 For the data quality, I dive into SHED and CFPB datasets exploring each rows and features by Google Colab describing their information in details. I have found the data quality of fitness for use:
 
 **SHED 2024**
+
 For completeness, there were no explicit missing values in the selected values considered by the research question. However, the implicit missing values were found on the EF2 feature with an empty string in over 50%. I decided to drop that feature to preserve its representative dataset. Also, I found there was 15% on the C4A feature and dropped those missing values of rows due to less percentage. 
 
 For Semantic Accuracy, we identified its feature meaning through the document:
@@ -67,6 +68,7 @@ For syntactic accuracy, most of the binary surveys of features answered yes or n
 The 1,948 rows were removed and EF2 feature were dropped due to implicit missing values. 
 
 **SHED 2020**
+
 There were format differences compare to the 2024 dataset that it formed as numeric 0.0 of no, 1.0 of yes, and -1.0 of  refused to response.
 The completeness was described with C4A that it had 13.8% of implicit missing values and we dropped those rows. Several variables were used -1 indicating refusal of  response. We removed those rows due to low percentage of the entire data. 
 
@@ -77,6 +79,7 @@ For Syntactic, many features are stored incorrectly as 0., 1. Instead of 0.0 or 
 Total of 1,711 rows were dropped with all syntactic inconsistencies corrected. 
 
 **CFPB**
+
 For completeness, there were no explicit and implicit missing values. The date and credit score group contained no empty strings as well.
 
 For semantic checks, the vol and vol_unadj features did not have negative values, and they were consistent and similar in magnitude. Additionally, the credit score group categories are correctly labeled in Deep subprime, Subprime, Near-prime, Prime, and Super-prime. Lastly, all 5 credit score groups appear exactly once for each month  with presenting a consistent data structure.
