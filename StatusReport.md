@@ -45,8 +45,11 @@ For the data quality, I dive into SHED and CFPB datasets exploring each rows and
 For completeness, there were no explicit missing values in the selected values considered by the research question. However, the implicit missing values were found on the EF2 feature with an empty string in over 50%. I decided to drop that feature to preserve its representative dataset. Also, I found there was 15% on the C4A feature and dropped those missing values of rows due to less percentage. 
 
 For Semantic Accuracy, we identified its feature meaning through the document:
+
 credit card
+
 - C2A — Credit card ownership
+  
 - C4A — Frequency of carrying an unpaid balance
 Financial Literacy
 - EF1 — Has emergency savings
