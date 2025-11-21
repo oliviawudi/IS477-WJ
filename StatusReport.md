@@ -9,18 +9,23 @@ This new dataset will allow us to enrich SHED respondents’ financial experienc
 We also deleted the third research question of "Do regional market conditions explain part of the change in debt behavior?" because there was no information about the market region in SHED dataset. We will focus on the financial literacy and credit card payment behavior through our research project. 
 
 ## 2. Timeline
-Week5 (Nov/17 ~ 23)
+
+**Week5 (Nov/17 ~ 23)**
+
 Jun: Data Cleaning & Data Analysis
 
 Wenqi: Data Cleaning & Data Analysis
 
 
-Week6 (Nov/24 ~ 30)
+**Week6 (Nov/24 ~ 30)**
+
 Jun: Workflow automation and provenance
 
 Wenqi: Reproducibility & Transparency
 
-Week7 (Nov/31 ~ Dec/7)
+
+**Week7 (Nov/31 ~ Dec/7)**
+
 Jun: Metadata and data documentation
 
 Release to GitHub of the completed project
@@ -38,7 +43,7 @@ Considering our feedback, we searched the dataset for more information about cre
 Building the pipeline of our final project in our introduction page  of our GitHub in terms of our research goal of understanding financial literacy and credit card usage behavior across the United States. I described the plan section of what we did so far. Additionally, I included the information about our datasets in the Collect / Acquire section and its details explained on the Google Colab file. 
 
 
-For the data quality, I dive into SHED and CFPB datasets exploring each rows and features by Google Colab describing their information in details. I have found the data quality of fitness for use:
+For the data quality, I dive into SHED and CFPB datasets, exploring each rows and features by Google Colab describing their information in details. I have found the data quality of fitness for use:
 
 **SHED 2024**
 
@@ -82,6 +87,23 @@ For Syntactic, many features are stored incorrectly as 0., 1. Instead of 0.0 or 
 Total of 1,711 rows were dropped with all syntactic inconsistencies corrected. 
 
 **CFPB**
+There are 1100 rows and 5 columns. The rows represents how much volumes of credit card released from the bank in each group of credit score. The each feature represents:
+
+- month - Months obervation count from 2000 Jan.
+
+- date - Observation date
+
+- vol - Clean up version of vol_unadj that remove seasonal effects.
+
+- vol_unadj -The actual total dollar volumn of new credit cards opened that month, which the actual money the bank gave out.
+
+- credit_score_group - Divided each group by the credit score as:
+
+  - Deep subprime : <580
+  - Subprime : 580 ~ 619
+  - Near-prime : 620 ~ 659
+  - Prime : 660 ~ 719
+  - Super-prime : 720+
 
 For completeness, there were no explicit and implicit missing values. The date and credit score group contained no empty strings as well.
 
@@ -93,6 +115,7 @@ There were no rows dropped. The dataset did not require cleaning, only interpret
 
 
 ### Wenqi
+
 ## Ethical Data Handling
 We will identify all ethical, legal, or policy constraints and how they were addressed. This project will integrate multiple datasets, including the Federal Reserve's SHED data (2020 & 2024) and the external credit volume indicator from the Consumer Financial Protection Bureau. Because these data contain sensitive consumer socioeconomic information, our data handling process would be guided by Consent, Privacy, Confidentiality, Copyright, and Terms of Use. 
 1.	Consent & Human Subject Consideration
