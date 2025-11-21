@@ -41,4 +41,16 @@ We obtain data from original source in:
 - CFPB : https://www.consumerfinance.gov/data-research/consumer-credit-trends/credit-cards/borrower-risk-profiles/#anchor_lending-levels 
   - Source : CFPB Consumer Credit Trends of borrower risk profiles (Lending Levels)
   - Format : CSV
-  - Action : Download and save as raw CSV for later aggregation and integration. 
+  - Action : Download and save as raw CSV for later aggregation and integration.
+ 
+
+## 3. Store & Organize
+
+## 4. Integrate & Enrich
+
+## 5. Quality & Clean
+
+## 6. Analyze
+
+## 7. Preserve & Share
+
