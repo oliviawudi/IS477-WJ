@@ -15,7 +15,7 @@ In addition to the technical aims, this project will contribute to a broader und
 
 1. Did the strength of the relationship between financial literacy and household credit card debt change after the COVID-19 pandemic?
 2. Did households with higher financial literacy show smaller increases in debt post-COVID-19?
-3. Do regional market conditions explain part of the change in debt behavior?
+
 
 
 # Data Lifecycle
