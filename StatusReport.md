@@ -1,7 +1,12 @@
 # Updates 
 ## 1. Project Pan (Based on Feedback)
-To address feedback encouraging integration of our data from multiple sources, we expanded our project by adding an external dataset from the Consumer Financial Protection Bureau (CFPB). Unlike the Federal Reserve’s SHED data, which mostly captures household-level experiences and perceptions, the CFPB dataset would provide macro-level indicators, including things like monthly trends in credit card originations, inquiries, and borrowing activity. 
+To address feedback encouraging integration of our data from multiple sources, we expanded our project by adding an external dataset from the Consumer Financial Protection Bureau (CFPB). Unlike the Federal Reserve’s SHED data, which mostly captures household-level experiences and perceptions, the CFPB dataset would provide macro-level indicators, including things like monthly trends in credit card originations, inquiries, and borrowing activity. We decided to acquire those data by SAS file on SHED dataset of the year 2024 and 2020, and CSV file on CFPB data.
+
+The CFPB of Consumer Credit Trends dataset provides monthly, nationwide information on new credit card originations. It includes the total dollar volume of new credit card limits issued to different credit score groups, ranging from deep subprime to super-prime borrowers. The dataset contains both seasonally adjusted and unadjusted lending volumes, allowing analysis of raw lending activity as well as smoothed long-term trends from the year 2007 Jan to 2025 Apr. Each row represents one credit score category for a given month. This dataset helps us understand how lending patterns differ across borrower risk levels.
+
 This new dataset will allow us to enrich SHED respondents’ financial experiences with contextual information about the broader credit environment. Adding the CFPB dataset introduces some challenges in the data integration process, which strengthens the methodological rigor of our project. 
+
+We also deleted the third research question of 
 ## 2. Timeline
 Week5 (Nov/17 ~ 23)
 Jun : Workflow automation and provenance
@@ -18,15 +23,9 @@ Release to GitHub of completed project
 
 
 
-## 3. Task
-Jun	
 
 
-Wenqi
-
-
-
-## 4. Contributions
+## 3. Contributions Task
 
 Jun	
 
