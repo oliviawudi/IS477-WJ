@@ -128,6 +128,7 @@ a) Python version
 b) Operating system details
 c) Any optional tools (e.g., Jupyter, Snakemake version)
 
+## Future Work
 
 
 # Data Lifecycle
