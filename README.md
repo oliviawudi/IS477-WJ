@@ -99,6 +99,35 @@ There were no rows dropped. The dataset did not require cleaning, only interpret
 1. Did the strength of the relationship between financial literacy and household credit card debt change after the COVID-19 pandemic?
 2. Did households with higher financial literacy show smaller increases in debt post-COVID-19?
 
+## Reproducibility and Transparency: 
+To ensure full reproducibility and transparency, we have created a complete reproducible research package that allows anyone to re-run our entire workflow
+1. Documentation describing how to reproduce the analysis
+We have posted a dedicated reproduce.md that outlines each step required to reproduce the workflow.
+This includes instructions for:
+- Setting up the Python environment
+- Downloading SHED data from the Federal Reserve website
+- Running the Snakemake workflow
+- Locating and interpreting the output files
+2. Box Storage
+Link: https://uofi.box.com/s/ietmow5zmh9ewrgu13qb431de4x3euce
+Following the course requirement, there are :
+- All output files and original csvs to a Box folder.
+- Ensured the link is publicly accessible to course graders.
+- Verified permissions 12+ hours before the deadline.
+- Added the Box data directory to .gitignore to avoid pushing large or restricted files to GitHub.
+This ensures reproducibility while respecting licensing rules.
+3. All code, workflow scripts, and automation tools
+4. Actual results including output data, visualizations, and tables
+- These are included in the jypter notebook we proveded.
+- As well as, the box folder
+5. Specification of software dependencies
+- A requirements.txt listing all libraries needed to run the workflow.
+- A  pip freeze snapshot for exact reproducibility of the environment.
+- The environment documentation includes:
+a) Python version
+b) Operating system details
+c) Any optional tools (e.g., Jupyter, Snakemake version)
+
 
 
 # Data Lifecycle
