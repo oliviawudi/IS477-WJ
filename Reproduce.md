@@ -21,4 +21,10 @@ You will have to be running our scripts:
 - The SHED data are public-use but cannot be redistributed via this repository. You must download them directly from the Federal Reserve:
 1. Link to Federal Reserve SHED data portal: https://www.federalreserve.gov/consumerscommunities/shed.htm
 2. Download the following files: a) 2020 SHED microdata (CSV) b) 2024 SHED microdata (sas7bdat)
-3. Save them to 
+3. Save them to /data/shed/.
+- CFPB data is publically licensed;raw files are included directly in box & /data/cfpb/.
+
+# License
+- Our code is released under the MIT license, allowing reuse with attribution.
+- SHED: cannot be redistrubuted; terms of use provided with the link.
+- CFPB: publically licensed government data.
