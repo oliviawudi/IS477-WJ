@@ -24,5 +24,5 @@ You will have to be running our scripts:
 
 # License
 - Our code is released under the MIT license, allowing reuse with attribution.
-- SHED: cannot be redistrubuted; terms of use provided with the link.
+- SHED: cannot be redistrubuted; but link direct to official website is p[rovided.
 - CFPB: publically licensed government data.
