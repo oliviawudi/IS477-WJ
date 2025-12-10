@@ -46,11 +46,12 @@ In addition to the technical aims, this project will contribute to a broader und
 
 3. Ethics & Legal Constraints 
 
-Ethical & Legal Constraints
-Copyright, Licensing, Terms of Use of CFPB makes Consumer Credit Trends available under an open public license, but use must follow the terms of use and attribution requirements. 
+
+- Copyright, Licensing, Terms of Use of CFPB makes Consumer Credit Trends available under an open public license, but use must follow the terms of use and attribution requirements. 
  SHED microdata are federal public-use files, but FRB requires proper citation, prohibits implying endorsement, and disallows altering variable meaning in a misleading way. 
  Therefore, we will cite both federal agencies explicitly in the report and codebook and preserve all original SHED variable labels and carefully documented transformations. 
-FAIR Assessment
+
+- FAIR Assessment
 Findable: We provide GitHub repository with clear directory structure and metadata; Box links for outputs.
 Accessible: Public GitHub repository; Box folder with permission verified for UofI accounts.
 Interoperable: Open formats (CSV, Markdown, Python scripts), standard Python libraries, and a Snakemake workflow.
