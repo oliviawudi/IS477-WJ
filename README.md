@@ -109,7 +109,7 @@ This includes instructions for:
 - Running the Snakemake workflow
 - Locating and interpreting the output files
 2. Box Storage
-Link: https://uofi.box.com/s/ietmow5zmh9ewrgu13qb431de4x3euce
+Link:(https://uofi.box.com/s/ietmow5zmh9ewrgu13qb431de4x3euce)
 Following the course requirement, there are :
 - All output files and original csvs to a Box folder.
 - Ensured the link is publicly accessible to course graders.
@@ -126,16 +126,23 @@ This ensures reproducibility while respecting licensing rules.
 - The environment documentation includes:
 a) Python version
 b) Operating system details
-c) Any optional tools (e.g., Jupyter, Snakemake version)
+c) Any optional tools (Jupyter, Snakemake version)
 
 ## Future Work
 While this project provides an integrated view of household financial literacy, credit card behavior, and national credit-market conditions before and after COVID-19, the findings also highlight several important directions for future work. Our current analysis shows that financial literacy indicators (such as emergency savings and emergency-response behavior) remained relatively stable between 2020 and 2024, and the relationship between financial resilience and credit access appears consistent across years. However, these results should be interpreted cautiously due to several data and methodological limitations that future research could address.
+
 The first limitation would be that SHED doesn’t really offer local or regional data regarding credit outcomes, which creates some barriers for us to examine geographical disparities. Merging datasets that would provide county level insights such as unemployment rate, local price indices, and regional price constraints would be salient to get a better understanding of how place-based economic conditions are shaping their roles in long term debt accumulation.
-Second, our current CFPB only captures credit volume and credit score groups of credit cards. Therefore, consider adding additional CFPB series such as utilization ratios, repayment patterns, and delinquency rates for future work so that we can have a more structured understanding of debt growth. 
+
+Second, our current CFPB only captures credit volume and credit score groups of credit cards. Therefore, consider adding additional CFPB series such as utilization ratios, repayment patterns, and delinquency rates for future work so that we can have a more structured understanding of debt growth.
+
 Third, the SHED survey structure limits how financial literacy can be operationalized beyond high-level proxies such as EF1 and EF3. More nuanced measures, such as numeracy questions, risk assessments, or multi-item literacy scales would enable richer modeling of how financial knowledge influences credit outcomes. Future surveys or experimental designs could help isolate causal pathways between literacy, behavior, and borrowing.
+
 In addition, our analysis right now used descriptive comparisons and simple aggregated visualizations. Future work could apply statistical modeling, such as logistic regression, hierarchical models, or matching techniques, to quantify differences in credit outcomes across demographic groups while controlling for income, education, or employment shifts.
+
 If there is a chance, making this project a longitudinal study would be important since it determines whether financial resilience has other behaviors over time (does it fluctuate or not?) rather than discretely between 2020 and 2024. With some additional waves of data from SHED, we could possibly model trends across the full post-pandemic recovery period plus the situation before the pandemic.
+
 Incorporating qualitative and mixed methods approaches would add more rigor to our project. Analyzing some survey comment fields, open-ended responses or interviews. These would conceptualize our findings with actual lived experience and offer insights into household decision-making.
+
 Therefore, we would love to expand our data source to add more features and years, analytical methods, and granularity of financial literacy measures would be able to allow us for a deeper understanding of how households navigate credit markets in periods of economic disruption. 
 
 
