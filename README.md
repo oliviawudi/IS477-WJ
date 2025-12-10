@@ -2,7 +2,7 @@
 ## Contributors 
 Jun Kim
 Wenqi Shan
-## Summary
+## Motivation
 The COVID-19 pandemic has had a profound and long-lasting impact on the global economy; therefore, household credit card debt is also influenced. This project aims to investigate how financial literacy and household credit card debt have changed after COVID-19. Our team will be using two large-scale datasets from the years 2020 and 2024 Federal Reserve’s Survey of Household Economics and Decisionmaking (SHED).
 
 By comparing the 2020 and 2024 SHED datasets, this project will explore how levels of financial literacy, credit access, and repayment behavior have evolved in response to the pandemic’s lasting economic effects. The analysis will examine demographic variables such as income, age, and education level to identify which groups experienced the most significant changes in credit card usage and debt management. We will also consider economic influences to interpret shifts in household financial behavior.
@@ -17,9 +17,32 @@ In addition to the technical aims, this project will contribute to a broader und
 
 
 ## Data Profile 
-SHED 2020: 
+1. SHED 2020 and 2024 : https://www.federalreserve.gov/consumerscommunities/shed_data.htm
 
-SHED 2024:
+- Source : Board of Governors of the Federal Reserve System
+
+- Format : SAS file of **publicxxxx.sas7dbat**
+
+- Dataset : https://www.federalreserve.gov/consumerscommunities/files/SHED_public_use_data_2020_(SAS).zip (2020), https://www.federalreserve.gov/consumerscommunities/files/SHED_public_use_data_2024_(SAS).zip (2024)
+
+- Action : Download SAS file and documentation, converting the SAS file to CSV with analyzing its documentation.
+
+- Documentation :
+  -  https://www.federalreserve.gov/consumerscommunities/files/SHED_2024codebook.pdf (2024)
+
+  - https://www.federalreserve.gov/consumerscommunities/files/SHED_2020codebook.pdf (2020)
+
+2. CFPB : https://www.consumerfinance.gov/data-research/consumer-credit-trends/credit-cards/borrower-risk-profiles/#anchor_lending-levels
+
+- Source : CFPB Consumer Credit Trends of borrower risk profiles (Lending Levels)
+
+- Format : CSV
+
+- Dataset : https://files.consumerfinance.gov/data/consumer-credit-trends/credit-cards/volume_data_Score_Level_CRC.csv
+
+- Action : Download and save as raw CSV for later aggregation and integration.
+
+  
 
 CFPB: 
 ## Data Quality
