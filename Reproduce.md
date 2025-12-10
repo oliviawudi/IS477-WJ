@@ -10,8 +10,6 @@ You will have to be running our scripts:
 - snakemake
 - A unix-like shell
 
-# Directory Structure
-
 # Set up the Python Enviroment
 - Create and acticate a virtual enviroment
 - Install dependencies
