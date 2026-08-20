@@ -119,8 +119,6 @@ Quality assessment followed the same three-part lens (completeness, semantic acc
 - **Syntactic accuracy**: Several fields were stored as `0.`/`1.` rather than proper integer types; all binary fields plus `C4A` were cast to `Int64` to standardize against 2024 before cross-year comparison.
 - **Net effect**: 137 rows dropped (refusal removal across analysis fields); `EF2` dropped as a feature; `C4A` `NaN`s recoded to sentinel `-2` rather than dropped.
 
-> **Note on reconciling with the repo's existing quality write-up**: the original IS477-WJ README states 1,948 rows removed for SHED 2024 and 1,711 for SHED 2020, and describes `C4A` blanks as dropped rather than recoded. The `Final Project Report.pdf` methodology (summarized above) gives more granular, script-level numbers — 3 rows for 2024 and 137 for 2020, with `C4A` blanks recoded rather than dropped in both waves. These read like two different points in the pipeline's evolution rather than the same claim stated two ways. Worth reconciling in the repo before this goes out — pick whichever reflects the *current* `clean_shed.py` logic and update the other document (or note both stages explicitly if the methodology genuinely changed between drafts).
-
 ### CFPB Lending Levels
 
 - **Completeness**: No explicit or implicit missing values across all 1,100 rows × 5 columns.
