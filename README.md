@@ -203,8 +203,7 @@ IS477-WJ/
 │   ├── IS_477_Data_Cleaning.ipynb
 │   ├── IS_477_Analysis.ipynb
 │   └── workflow_and_provenance.ipynb
-├── reports/
-│   └── Final Project Report.pdf
+├── Final Project Report.pdf
 ├── Snakefile
 ├── requirements.txt
 ├── CITATION.cff
