@@ -1,6 +1,6 @@
 # Data Dictionary
 
-This file documents every variable used from each of the three source datasets, the transformations applied to it, and why. It is meant to stand on its own — a reader should be able to trust a downstream number in `reports/` back to exactly what raw field it came from and what cleaning decision touched it.
+This file documents every variable used from each of the three source datasets, the transformations applied to it, and why. It is meant to stand on its own.
 
 Conventions used throughout:
 - **Source variable** — the exact field name as it appears in the original codebook/file.
