@@ -1,195 +1,257 @@
-# IS477-WJ
-## Contributors 
-Jun Kim
-Wenqi Shan
-## Motivation
-The COVID-19 pandemic has had a profound and long-lasting impact on the global economy; therefore, household credit card debt is also influenced. This project aims to investigate how financial literacy and household credit card debt have changed after COVID-19. Our team will be using two large-scale datasets from the years 2020 and 2024 Federal Reserve’s Survey of Household Economics and Decisionmaking (SHED).
+# Financial Literacy and Household Credit Card Debt Before and After COVID-19
 
-By comparing the 2020 and 2024 SHED datasets, this project will explore how levels of financial literacy, credit access, and repayment behavior have evolved in response to the pandemic’s lasting economic effects. The analysis will examine demographic variables such as income, age, and education level to identify which groups experienced the most significant changes in credit card usage and debt management. We will also consider economic influences to interpret shifts in household financial behavior.
+## Contributors
 
-Our approach combines data integration, cleaning, and statistical analysis to ensure a transparent and reproducible workflow. The findings will provide insights into how households adapted their financial strategies in the years following COVID-19 and last year of 2024 after COVID-19.
+- **Wenqi Shan** 
+- **Jun Kim**
 
-The overall goal is to produce a reproducible, data-integrated analysis that would demonstrate how the pandemic and economic disruptions affect individuals’ financial decision-making and credit outcomes. Through the process of merging these two large federal datasets, we will illustrate multiple aspects of the data lifecycle and other techniques that were learned in class.
+## Summary
 
-To address feedback encouraging integration of our data from multiple sources, we expanded our project by adding an external dataset from the Consumer Financial Protection Bureau (CFPB). Unlike the Federal Reserve’s SHED data, which mostly captures household-level experiences and perceptions, the CFPB dataset would provide macro-level indicators, including things like monthly trends in credit card originations, inquiries, and borrowing activity.
+The COVID-19 pandemic reshaped household finances in ways that are still unfolding. This project asks a narrow, testable version of that broad question: **did the relationship between financial literacy and household credit card debt change between 2020 and 2024, and did more financially literate households see smaller increases in debt?**
 
-In addition to the technical aims, this project will contribute to a broader understanding of financial resilience: how knowledge, education, and access to certain financial resources influence households to make financial decisions and manage debt in a time of crisis. And by highlighting the difference between 2020 and 2024, we hope to address the importance of promoting household stability in an unstable economic setting.
+We answer this by integrating three federal and public data sources into a single reproducible pipeline. Two are individual-level survey waves — the Federal Reserve's *Survey of Household Economics and Decisionmaking* (SHED) for 2020 and 2024 — and the third is a macro-level series from the Consumer Financial Protection Bureau (CFPB) tracking national credit card origination volume by borrower risk tier. The SHED waves let us compare self-reported financial literacy proxies (emergency savings, emergency-expense payment behavior) against self-reported credit card repayment behavior at the household level, cross-sectionally in each year. The CFPB series lets us contextualize those household-level patterns against what was actually happening in the national credit market at the same time — did the volume and risk composition of new credit card originations shift in ways consistent with the survey findings?
 
+Because SHED changes its microdata encoding, variable completeness, and (in some years) its exact question wording from wave to wave, most of the analytical effort in this project went into **data profiling and cleaning** rather than modeling: reconciling two different missing-value conventions (empty string vs. `-1` sentinel), checking for logical contradictions between related survey items (e.g., a respondent who says they *could* cover an emergency but not *how* they would), and standardizing types across years before any comparison could be trusted. That cleaning process — and the documentation of every decision made during it — is the core deliverable of this repository, not just the downstream statistics.
 
-## Data Profile 
-1. SHED 2020 and 2024 : https://www.federalreserve.gov/consumerscommunities/shed_data.htm
-
-- Source : Board of Governors of the Federal Reserve System
-
-- Format : SAS file of **publicxxxx.sas7dbat**
-
-- Dataset : https://www.federalreserve.gov/consumerscommunities/files/SHED_public_use_data_2020_(SAS).zip (2020), https://www.federalreserve.gov/consumerscommunities/files/SHED_public_use_data_2024_(SAS).zip (2024)
-
-- Action : Download SAS file and documentation, converting the SAS file to CSV with analyzing its documentation.
-
-- Documentation :
-  -  https://www.federalreserve.gov/consumerscommunities/files/SHED_2024codebook.pdf (2024)
-
-  - https://www.federalreserve.gov/consumerscommunities/files/SHED_2020codebook.pdf (2020)
-
-2. CFPB : https://www.consumerfinance.gov/data-research/consumer-credit-trends/credit-cards/borrower-risk-profiles/#anchor_lending-levels
-
-- Source : CFPB Consumer Credit Trends of borrower risk profiles (Lending Levels)
-
-- Format : CSV
-
-- Dataset : https://files.consumerfinance.gov/data/consumer-credit-trends/credit-cards/volume_data_Score_Level_CRC.csv
-
-- Action : Download and save as raw CSV for later aggregation and integration.
-
-  
-
-3. Ethics & Legal Constraints 
-
-
-- Copyright, Licensing, Terms of Use of CFPB makes Consumer Credit Trends available under an open public license, but use must follow the terms of use and attribution requirements. 
- SHED microdata are federal public-use files, but FRB requires proper citation, prohibits implying endorsement, and disallows altering variable meaning in a misleading way. 
- Therefore, we will cite both federal agencies explicitly in the report and codebook and preserve all original SHED variable labels and carefully documented transformations. 
-
-- FAIR Assessment
-Findable: We provide GitHub repository with clear directory structure and metadata; Box links for outputs.
-Accessible: Public GitHub repository; Box folder with permission verified for UofI accounts.
-Interoperable: Open formats (CSV, Markdown, Python scripts), standard Python libraries, and a Snakemake workflow.
-Reusable: MIT-licensed code, explicit instructions for rerunning the entire pipeline.
-
-
-## Data Quality
-### **SHED 2024**
-
-For completeness, there were no explicit missing values in the selected values considered by the research question. However, the implicit missing values were found on the EF2 feature with an empty string in over 50%. I decided to drop that feature to preserve its representative dataset. Also, I found there was 15% on the C4A feature and dropped those missing values of rows due to less percentage. 
-
-For Semantic Accuracy, we identified its feature meaning through the document:
-
-credit card
-
-- C2A — Credit card ownership
-  
-- C4A — Frequency of carrying an unpaid balance
-Financial Literacy
-- EF1 — Has emergency savings
-- EF2 — Ability to cover 3 months if income is lost
-- EF3 - Suppose that you have an emergency expense that costs $400. Based on your current financial situation, how would you pay for this expense?
-  - EF3_a — Put it on my credit card and pay it off in full at the next statement
-  - EF3_b — Put it on my credit card and pay it off over time
-  - EF3_c — With the money currently in my checking/savings account or with cash
-  - EF3_d — Using money from a bank loan or line of credit
-  - EF3_e — By borrowing from a friend or family member
-  - EF3_f — Using a payday loan, deposit advance, or overdraft
-  - EF3_g — By selling something
-  - EF3_h — I wouldn't be able to pay for the expense right now
-
-We tested for logical contradictions. People who answered yes for EF2 with answering no for EF3, we found 3 cases and removed 3 rows considering the contradiction. Additionally, we check the contradiction between C2A and C4A. There was no contradiction that nobody without a credit card reported credit card repayment behavior. 
-
-For syntactic accuracy, most of the binary surveys of features answered yes or no correctly. Additionally, the EF2 feature had invalid empty strings, and we dropped it entirely because more than 50% was missing implicitly. At last, C4A contained a low percentage of empty string, and we just dropped those rows instead of dropping that feature to preserve as representative data. 
-
-The 1,948 rows were removed and EF2 feature were dropped due to implicit missing values. 
-
-### **SHED 2020**
-
-There were format differences compare to the 2024 dataset that it formed as numeric 0.0 of no, 1.0 of yes, and -1.0 of  refused to response.
-The completeness was described with C4A that it had 13.8% of implicit missing values and we dropped those rows. Several variables were used -1 indicating refusal of  response. We removed those rows due to low percentage of the entire data. 
-
-For semantics, we used EF1 to compare the meaning response of the EF3 series of emergency payment options, and there was no contradiction. The C2A of credit ownership had no contradiction of response from the C4A of payment cover. 
-
-For Syntactic, many features are stored incorrectly as 0., 1. Instead of 0.0 or 1.0. We converted all binary features and the C4A feature to an integer format as Int64 to standardize their responses. 
-
-Total of 1,711 rows were dropped with all syntactic inconsistencies corrected. 
-
-### **CFPB**
-
-There are 1100 rows and 5 columns. The rows represents how much volumes of credit card released from the bank in each group of credit score. The each feature represents:
-
-- month - Months obervation count from 2000 Jan.
-
-- date - Observation date
-
-- vol - Clean up version of vol_unadj that remove seasonal effects.
-
-- vol_unadj -The actual total dollar volumn of new credit cards opened that month, which the actual money the bank gave out.
-
-- credit_score_group - Divided each group by the credit score as:
-
-  - Deep subprime : <580
-  - Subprime : 580 ~ 619
-  - Near-prime : 620 ~ 659
-  - Prime : 660 ~ 719
-  - Super-prime : 720+
-
-For completeness, there were no explicit and implicit missing values. The date and credit score group contained no empty strings as well.
-
-For semantic checks, the vol and vol_unadj features did not have negative values, and they were consistent and similar in magnitude. Additionally, the credit score group categories are correctly labeled in Deep subprime, Subprime, Near-prime, Prime, and Super-prime. Lastly, all 5 credit score groups appear exactly once for each month  with presenting a consistent data structure.
-
-For syntactic, the numeric features of month, vol, and vol_unadj have correct types. The date format was consistent across the dataset. Finally, the credit score group string was valid as well. 
-
-There were no rows dropped. The dataset did not require cleaning, only interpretation.
-
-
-## Research Question
+**Research Questions**
 
 1. Did the strength of the relationship between financial literacy and household credit card debt change after the COVID-19 pandemic?
 2. Did households with higher financial literacy show smaller increases in debt post-COVID-19?
 
-## Reproducibility and Transparency: 
-To ensure full reproducibility and transparency, we have created a complete reproducible research package that allows anyone to re-run our entire workflow
-1. Documentation describing how to reproduce the analysis
-We have posted a dedicated reproduce.md that outlines each step required to reproduce the workflow.
-This includes instructions for:
-- Setting up the Python environment
-- Downloading SHED data from the Federal Reserve website
-- Running the Snakemake workflow
-- Locating and interpreting the output files
-2. Box Storage
-Link:(https://uofi.box.com/s/ietmow5zmh9ewrgu13qb431de4x3euce)
-Following the course requirement, there are :
-- All output files and original csvs to a Box folder.
-- Ensured the link is publicly accessible to course graders.
-- Verified permissions 12+ hours before the deadline.
-- Added the Box data directory to .gitignore to avoid pushing large or restricted files to GitHub.
-This ensures reproducibility while respecting licensing rules.
-3. All code, workflow scripts, and automation tools
-4. Actual results including output data, visualizations, and tables
-- These are included in the jypter notebook we proveded.
-- As well as, the box folder
-5. Specification of software dependencies
-- A requirements.txt listing all libraries needed to run the workflow.
-- A  pip freeze snapshot for exact reproducibility of the environment.
-- The environment documentation includes:
-a) Python version
-b) Operating system details
-c) Any optional tools (Jupyter, Snakemake version)
+## Data Profile
+
+Full variable-level metadata (definitions, types, allowed values, missingness, and provenance for every field used in this analysis) lives in [`docs/data_dictionary.md`](docs/data_dictionary.md). The summary below covers dataset-level identification, access, and licensing — the metadata a data catalog would need to index this project.
+
+### Dataset 1 — SHED 2020 Public-Use Microdata
+
+| Field | Value |
+|---|---|
+| **Title** | Survey of Household Economics and Decisionmaking (SHED), 2020 Public-Use Microdata |
+| **Publisher** | Board of Governors of the Federal Reserve System |
+| **Landing page** | <https://www.federalreserve.gov/consumerscommunities/shed_data.htm> |
+| **Direct download** | [SHED 2020 SAS ZIP](https://www.federalreserve.gov/consumerscommunities/files/SHED_public_use_data_2020_(SAS).zip) |
+| **Documentation / codebook** | [2020 SHED codebook (PDF)](https://www.federalreserve.gov/consumerscommunities/files/SHED_2020codebook.pdf) |
+| **Format (as delivered)** | SAS transport file (`publicxxxx.sas7bdat`) |
+| **Format (as used in this project)** | CSV, converted via `pandas`/`pyreadstat` |
+| **Temporal coverage** | Fielded 2020 (reference period: household finances in 2020) |
+| **Spatial coverage** | United States, national sample |
+| **Unit of observation** | Individual/household respondent |
+| **License / terms of use** | U.S. federal public-use microdata; free to use, but the Federal Reserve requires proper citation, prohibits implying endorsement, and disallows altering variable meaning in a misleading way |
+| **Access constraints** | None (public download); no PII in public-use file |
+| **Retrieval method in this project** | Direct HTTPS download → SAS-to-CSV conversion in `notebooks/IS_477_Data_Cleaning.ipynb` |
+
+### Dataset 2 — SHED 2024 Public-Use Microdata
+
+| Field | Value |
+|---|---|
+| **Title** | Survey of Household Economics and Decisionmaking (SHED), 2024 Public-Use Microdata |
+| **Publisher** | Board of Governors of the Federal Reserve System |
+| **Landing page** | <https://www.federalreserve.gov/consumerscommunities/shed_data.htm> |
+| **Direct download** | [SHED 2024 SAS ZIP](https://www.federalreserve.gov/consumerscommunities/files/SHED_public_use_data_2024_(SAS).zip) |
+| **Documentation / codebook** | [2024 SHED codebook (PDF)](https://www.federalreserve.gov/consumerscommunities/files/SHED_2024codebook.pdf) |
+| **Format (as delivered)** | SAS transport file (`publicxxxx.sas7bdat`) |
+| **Format (as used in this project)** | CSV, converted via `pandas`/`pyreadstat` |
+| **Temporal coverage** | Fielded 2024 (reference period: household finances in 2024) |
+| **Spatial coverage** | United States, national sample |
+| **Unit of observation** | Individual/household respondent |
+| **License / terms of use** | Same terms as the 2020 wave (see above) |
+| **Access constraints** | None (public download); no PII in public-use file |
+| **Retrieval method in this project** | Direct HTTPS download → SAS-to-CSV conversion in `notebooks/IS_477_Data_Cleaning.ipynb` |
+
+### Dataset 3 — CFPB Consumer Credit Trends: Credit Card Borrower Risk Profiles (Lending Levels)
+
+| Field | Value |
+|---|---|
+| **Title** | Consumer Credit Trends — Credit Cards: Borrower Risk Profiles, Lending Levels |
+| **Publisher** | Consumer Financial Protection Bureau |
+| **Landing page** | <https://www.consumerfinance.gov/data-research/consumer-credit-trends/credit-cards/borrower-risk-profiles/#anchor_lending-levels> |
+| **Direct download** | [`volume_data_Score_Level_CRC.csv`](https://files.consumerfinance.gov/data/consumer-credit-trends/credit-cards/volume_data_Score_Level_CRC.csv) |
+| **Format** | CSV |
+| **Temporal coverage** | Monthly series, January 2007 through at least April 2025, continuously updated |
+| **Spatial coverage** | United States, national aggregate |
+| **Unit of observation** | Month × credit-score-tier aggregate (not individual-level) |
+| **License / terms of use** | Made available under an open public license; use must follow CFPB terms of use and attribution requirements |
+| **Access constraints** | None (public download); dataset contains only aggregated statistics, no personal information |
+| **Retrieval method in this project** | Direct HTTPS download, saved as raw CSV for aggregation to the SHED reference years |
+
+### Why three sources, and how they connect
+
+SHED gives self-reported, individual-level financial literacy and credit behavior — but only as two disconnected snapshots (2020, 2024), with no way to see the market context around each snapshot. CFPB gives the market context (how much credit was actually being extended, and to which risk tiers) but no individual-level literacy signal. Integrating them lets the analysis distinguish "households changed their behavior" from "the credit market itself changed what was available to them" — a distinction neither source can make alone.
+
+Two harmonization notes worth flagging for anyone reusing this pipeline:
+
+- **Sample-size alignment**: the 2024 SHED wave (~12,300 respondents) is larger than the 2020 wave (~11,600). To keep year-over-year comparisons from being dominated by unequal sample size, a random subsample of 2024 respondents was drawn to match the 2020 sample size before cross-year comparison.
+- **CFPB provenance caveat**: CFPB's underlying credit records are drawn from a sample tied to a single nationwide consumer reporting agency (NCRA). CFPB itself notes that shifts in market share across credit bureaus cannot be fully controlled for in this series — worth keeping in mind when interpreting the merged SHED–CFPB comparisons.
+- **SHED–CFPB linkage**: since SHED and CFPB have no shared respondent ID (one is survey microdata, the other is an aggregate panel), the two are linked through a derived proxy credit-score tier constructed from SHED responses (see `docs/data_dictionary.md` for the full construction logic) and matched to CFPB's `credit_score_group` categories.
+
+### Ethical and Legal Constraints
+
+- **CFPB data**: available under an open public license; usage must follow CFPB's terms of use and attribution requirements.
+- **SHED microdata**: federal public-use files. The Federal Reserve requires proper citation, prohibits implying endorsement, and disallows altering variable meaning in a misleading way. We cite both federal agencies explicitly in this README and in `docs/data_dictionary.md`, and we preserve all original SHED variable labels, documenting every transformation applied.
+- **Privacy**: all three sources are public-use, de-identified, and/or aggregate data. No PII is present in or generated by this project.
+
+### FAIR Assessment
+
+| Principle | How this project satisfies it |
+|---|---|
+| **Findable** | Public GitHub repository with a documented directory structure, a dataset-level table (above) and a variable-level data dictionary (`docs/data_dictionary.md`); large files indexed via a public Box folder link. |
+| **Accessible** | Public GitHub repo; Box folder with access verified for UofI accounts; all three source datasets are freely downloadable without registration. |
+| **Interoperable** | Open formats (CSV, Markdown, Jupyter), standard Python libraries (`pandas`, `pyreadstat`, `scikit-learn`), and a Snakemake workflow specifying step dependencies explicitly. |
+| **Reusable** | MIT-licensed code, CC-BY-4.0 documentation, explicit step-by-step reproduction instructions (below), and a variable-level codebook mapping every derived feature back to its source variable. |
+
+## Data Quality
+
+Quality assessment followed the same three-part lens (completeness, semantic accuracy, syntactic accuracy) across all three sources. Full remediation logic, exact row counts, and the derived `risk_score`/`proxy_credit_group` construction are documented per-dataset in `docs/data_dictionary.md`; summarized here:
+
+### SHED 2024
+
+- **Starting shape**: 12,295 respondents × 753 columns, subset to the literacy/credit-relevant fields (`C2A`, `C4A`, `EF1`, `EF2`, `EF3_a`–`EF3_h`).
+- **Completeness**: `EF2` was empty-string in over 50% of records and was dropped as a feature rather than imputed, to avoid manufacturing signal from a mostly-absent variable. `C4A` blanks were cross-checked against `C2A` and found to correspond entirely to non-cardholders — rather than dropping these rows, they were **recoded** to a new valid category, `"No credit card ownership"`, preserving them as informative rather than missing.
+- **Semantic accuracy**: Cross-checked `EF2` against the `EF3` emergency-payment series for logical contradiction (answering "yes, I have 3 months of coverage" while also answering "I wouldn't be able to pay for the expense"). Found and removed 3 contradictory rows. Checked `C2A` against `C4A` for the impossible case of repayment behavior reported by a non-cardholder — found none after the recoding step above.
+- **Syntactic accuracy**: Binary survey fields validated as consistently yes/no coded.
+- **Net effect**: 3 rows removed for semantic contradiction; `EF2` dropped as a feature; `C4A` blanks recoded rather than dropped.
+
+### SHED 2020
+
+- **Starting shape**: 11,648 respondents × 372 columns, subset to the same field set (numerically coded in this wave: `C2A`, `C4A`, `EF1`, `EF2`, `EF3_A`–`EF3_H`).
+- **Completeness**: 2020 uses a different missing-value convention than 2024 — binary fields coded `0`/`1`, with `-1` denoting refusal, and true missing values appearing as `NaN`. `C4A` had ~13.8% `NaN` (true missing); these were filled with a distinct sentinel value (`-2`) rather than dropped, keeping them distinguishable from both valid responses and refusals. Rows with `-1` (refusal) in *any* of the analysis fields were dropped entirely. `EF2` was dropped as a feature in this wave too, for consistency with 2024 and to keep both years directly comparable on the remaining variables.
+- **Semantic accuracy**: `EF1` cross-checked against the `EF3` series, and `C2A` against `C4A` — no contradictions found.
+- **Syntactic accuracy**: Several fields were stored as `0.`/`1.` rather than proper integer types; all binary fields plus `C4A` were cast to `Int64` to standardize against 2024 before cross-year comparison.
+- **Net effect**: 137 rows dropped (refusal removal across analysis fields); `EF2` dropped as a feature; `C4A` `NaN`s recoded to sentinel `-2` rather than dropped.
+
+> **Note on reconciling with the repo's existing quality write-up**: the original IS477-WJ README states 1,948 rows removed for SHED 2024 and 1,711 for SHED 2020, and describes `C4A` blanks as dropped rather than recoded. The `Final Project Report.pdf` methodology (summarized above) gives more granular, script-level numbers — 3 rows for 2024 and 137 for 2020, with `C4A` blanks recoded rather than dropped in both waves. These read like two different points in the pipeline's evolution rather than the same claim stated two ways. Worth reconciling in the repo before this goes out — pick whichever reflects the *current* `clean_shed.py` logic and update the other document (or note both stages explicitly if the methodology genuinely changed between drafts).
+
+### CFPB Lending Levels
+
+- **Completeness**: No explicit or implicit missing values across all 1,100 rows × 5 columns.
+- **Semantic accuracy**: `vol`/`vol_unadj` contain no negative values and are consistent in magnitude with one another; all five `credit_score_group` categories (Deep subprime, Subprime, Near-prime, Prime, Super-prime) appear exactly once per month, confirming a consistent panel structure.
+- **Syntactic accuracy**: Numeric types and date formats validated as consistent throughout.
+- **Net effect**: No rows dropped — this dataset required interpretation, not cleaning.
+
+## Findings
+
+**RQ1 — Did the strength of the relationship between financial literacy and household credit card debt change after COVID-19? No.**
+
+Within SHED alone, every literacy and credit-behavior indicator we tracked was remarkably stable across the two waves: `EF1` (has emergency savings) sits at essentially 50/50 in both 2020 and 2024, "good" emergency-response behaviors (`EF3_A`, `EF3_C`) and "stressed" behaviors (`EF3_B/D/E/F/G/H`) moved by only 1–3 percentage points, and credit card ownership (`C2A`) plus unpaid-balance behavior (`C4A`) shifted by about 1 percentage point. None of this looks like a pandemic-driven structural change — it reads as stability, or noise around a stable baseline.
+
+Once SHED is merged with CFPB by credit-score tier, the *relationship* between literacy and credit access is where the real signal is — and it held constant across years. In both 2020 and 2024, credit-score groups with higher `EF1` and more "good" `EF3` behavior (Prime, Super-prime) received substantially larger credit card origination volumes than Deep Subprime/Subprime groups, who simultaneously showed the weakest literacy indicators and the highest financial-stress indicators (`C4A`, `EF3_B`, `EF3_D`). That literacy-to-access gradient is qualitatively the same shape in both years — it didn't compress, widen, or flip.
+
+**RQ2 — Did households with higher financial literacy show smaller increases in debt post-COVID? No — the opposite.**
+
+Using CFPB credit volume as a proxy for new credit card debt issuance, every credit-score tier saw higher origination volume in 2024 than in 2020 — but the *largest* increases were concentrated in Prime and Super-prime tiers, the groups with the strongest emergency-savings rates and lowest financial-stress indicators. Deep Subprime and Subprime groups grew too, just by a smaller margin. So post-COVID credit expansion disproportionately flowed to already financially-resilient households rather than to the groups showing more financial stress — the inverse of what the "smaller increases for literate households" hypothesis predicted.
+
+**Headline takeaway:** the pandemic didn't reshape the relationship between financial literacy and credit card debt — it reinforced the pre-existing gradient. Households with stronger financial-resilience indicators kept getting more credit access and larger credit growth after COVID, while financially stressed households saw smaller gains on both fronts. Household resilience proved sticky; credit-market conditions didn't level the playing field.
+
+## Reproducing This Analysis
+
+Full step-by-step commands are in [`docs/Reproduce.md`](docs/Reproduce.md). At a high level:
+
+1. **Clone the repo and set up the environment**
+   ```bash
+   git clone https://github.com/oliviawudi/IS477-WJ.git
+   cd IS477-WJ
+   python3 -m venv venv && source venv/bin/activate
+   pip install -r requirements.txt
+   ```
+2. **Get the data.** SHED 2020/2024 and the CFPB CSV are fetched by the pipeline directly from the URLs in the Data Profile table above; alternatively, pull the already-processed outputs from the [Box folder](https://uofi.box.com/s/ietmow5zmh9ewrgu13qb431de4x3euce).
+3. **Run the Snakemake workflow** to execute cleaning → integration → analysis end to end:
+   ```bash
+   snakemake --cores 1
+   ```
+4. **Inspect outputs** — cleaned CSVs, the merged analysis table, and generated figures/tables land in `reports/` and `data/processed/`; see `docs/Reproduce.md` for exact filenames.
+
+Software environment is pinned in `requirements.txt`, with a `pip freeze` snapshot for exact reproducibility; see `docs/Reproduce.md` for Python version and OS details used during development.
+
+### Workflow DAG
+
+The Snakemake workflow encodes the full lineage from raw SHED/CFPB files to final merged analysis, as a directed acyclic graph:
+
+```
+clean_shed ──► shed24_match_shed20 ──┬──► aggregate_sheds ──────────────┐
+                                       └──► shed_credit ──► shed_credit_concat ──► shed_group ──┐
+                                                                                                  ├──► merge ──► merge_analysis ──┐
+clean_cfpb ──► cfpb_group ──► cfpb_analysis ────────────────────────────────────────────────────┘                              ├──► run_all
+                                                                                    aggregate_sheds ──► shed_analysis ───────────┘
+```
+
+| Rule | Input | Output | Purpose |
+|---|---|---|---|
+| `clean_shed` | `shed2024.sas7bdat`, `public2020.sas7bdat` | `shed24_cleaned2.csv`, `shed20_cleaned2.csv` | Missing-value handling, type normalization, recoding (see Data Quality above) |
+| `clean_cfpb` | `volume_data_Score_Level_CRC.csv` | `cfpd_cleaned2.csv` | CFPB validation/cleaning |
+| `shed24_match_shed20` | `shed24_cleaned2.csv` | `df_shed24ver1.csv` | Subsamples 2024 to match 2020 sample size |
+| `aggregate_sheds` | `df_shed24ver1.csv`, `shed20_cleaned2.csv` | `df_shed.csv` | Concatenates harmonized SHED years |
+| `shed_credit` / `shed_credit_concat` | `df_shed24ver1.csv`, `shed20_cleaned2.csv` | `shed2.csv` | Filters both years to credit-card owners, concatenates |
+| `shed_group` | `shed2.csv` | `shed_year.csv` | Groups by `proxy_credit_group` × year |
+| `cfpb_group` | `cfpd_cleaned2.csv` | `crc_year.csv` | Aggregates by `credit_score_group` × year |
+| `cfpb_analysis` | `crc_year.csv` | `analysis_cfpb.PNG` | CFPB-only lending-volume diagnostics |
+| `shed_analysis` | `df_shed.csv` | SHED diagnostic PNGs | SHED-only profiling/exploratory plots |
+| `merge` | `shed_year.csv`, `crc_year.csv` | `merged.csv` | Aligns individual-level SHED behavior with macro-level CFPB credit environment |
+| `merge_analysis` | `merged.csv` | `analysis_merged_1.PNG`, `analysis_merged_2.PNG` | Final figures answering both research questions |
+| `run_all` | all analysis outputs | — | Orchestrates the full pipeline end to end |
+
+## Repository Structure
+
+```
+IS477-WJ/
+├── data/
+│   ├── raw/                  # gitignored — fetched via pipeline or Box
+│   └── processed/            # gitignored — pipeline outputs
+├── docs/
+│   ├── data_dictionary.md    # variable-level metadata for all 3 datasets
+│   ├── ProjectPlan.md
+│   ├── StatusReport.md
+│   └── Reproduce.md
+├── notebooks/
+│   ├── IS_477_Data_Cleaning.ipynb
+│   ├── IS_477_Analysis.ipynb
+│   └── workflow_and_provenance.ipynb
+├── reports/
+│   └── Final Project Report.pdf
+├── Snakefile
+├── requirements.txt
+├── CITATION.cff
+├── LICENSE
+└── README.md
+```
 
 ## Future Work
-While this project provides an integrated view of household financial literacy, credit card behavior, and national credit-market conditions before and after COVID-19, the findings also highlight several important directions for future work. Our current analysis shows that financial literacy indicators (such as emergency savings and emergency-response behavior) remained relatively stable between 2020 and 2024, and the relationship between financial resilience and credit access appears consistent across years. However, these results should be interpreted cautiously due to several data and methodological limitations that future research could address.
 
-The first limitation would be that SHED doesn’t really offer local or regional data regarding credit outcomes, which creates some barriers for us to examine geographical disparities. Merging datasets that would provide county level insights such as unemployment rate, local price indices, and regional price constraints would be salient to get a better understanding of how place-based economic conditions are shaping their roles in long term debt accumulation.
+- **Geography**: SHED does not offer regional or county-level detail, limiting analysis of geographic disparities. Merging county-level covariates (unemployment, local price indices) would help separate place-based effects from individual literacy effects.
+- **CFPB depth**: the current CFPB extract covers only origination volume and risk-tier composition. Adding utilization, repayment, and delinquency series would sharpen the national-context comparison.
+- **Literacy measurement**: `EF1`/`EF3` are high-level proxies. Multi-item literacy scales or numeracy batteries would support richer modeling of the literacy → debt pathway.
+- **Modeling depth**: current analysis is descriptive/comparative; logistic regression, hierarchical models, or matching methods could quantify group differences while controlling for income, education, and employment shifts.
+- **Longitudinal extension**: additional SHED waves (pre-pandemic baseline, intermediate years) would let the project model a trend rather than a two-point comparison.
+- **Qualitative complement**: SHED's open-ended fields, where available, could add lived-experience context to the quantitative patterns.
 
-Second, our current CFPB only captures credit volume and credit score groups of credit cards. Therefore, consider adding additional CFPB series such as utilization ratios, repayment patterns, and delinquency rates for future work so that we can have a more structured understanding of debt growth.
+## References
 
-Third, the SHED survey structure limits how financial literacy can be operationalized beyond high-level proxies such as EF1 and EF3. More nuanced measures, such as numeracy questions, risk assessments, or multi-item literacy scales would enable richer modeling of how financial knowledge influences credit outcomes. Future surveys or experimental designs could help isolate causal pathways between literacy, behavior, and borrowing.
+### Data Sources
 
-In addition, our analysis right now used descriptive comparisons and simple aggregated visualizations. Future work could apply statistical modeling, such as logistic regression, hierarchical models, or matching techniques, to quantify differences in credit outcomes across demographic groups while controlling for income, education, or employment shifts.
+Federal Reserve Board. (2021). *Survey of Household Economics and Decisionmaking (SHED), 2020 Public-Use Microdata*. Retrieved from <https://www.federalreserve.gov/consumerscommunities/shed_data.htm>
 
-If there is a chance, making this project a longitudinal study would be important since it determines whether financial resilience has other behaviors over time (does it fluctuate or not?) rather than discretely between 2020 and 2024. With some additional waves of data from SHED, we could possibly model trends across the full post-pandemic recovery period plus the situation before the pandemic.
+Federal Reserve Board. (2025). *Survey of Household Economics and Decisionmaking (SHED), 2024 Public-Use Microdata*. Retrieved from <https://www.federalreserve.gov/consumerscommunities/shed_data.htm>
 
-Incorporating qualitative and mixed methods approaches would add more rigor to our project. Analyzing some survey comment fields, open-ended responses or interviews. These would conceptualize our findings with actual lived experience and offer insights into household decision-making.
+Consumer Financial Protection Bureau. (2025). *Consumer Credit Trends: Credit Card Originations and Credit Limits*. Retrieved from <https://www.consumerfinance.gov/data-research/consumer-credit-trends/credit-cards/borrower-risk-profiles/#anchor_lending-levels>
 
-Therefore, we would love to expand our data source to add more features and years, analytical methods, and granularity of financial literacy measures would be able to allow us for a deeper understanding of how households navigate credit markets in periods of economic disruption. 
+### Software
 
-## References 
-2020 Public-Use Microdata. Retrieved from:
-https://www.federalreserve.gov/consumerscommunities/shed_data.htm
+McKinney, W. (2010). Data structures for statistical computing in Python. In *Proceedings of the 9th Python in Science Conference* (Vol. 445, pp. 51–56).
 
-Federal Reserve Board. (2024). Survey of Household Economics and Decisionmaking (SHED), 2024 Public-Use Microdata. Retrieved from:
-https://www.federalreserve.gov/consumerscommunities/shed_data.htm
+Pedregosa, F., et al. (2011). Scikit-learn: Machine learning in Python. *Journal of Machine Learning Research*, 12, 2825–2830.
 
-Consumer Financial Protection Bureau. (2025) Consumer Credit Trends: Credit Card Originations and Credit Limits. Retrieved from: https://www.consumerfinance.gov/data-research/consumer-credit-trends/credit-cards/borrower-risk-profiles/#anchor_lending-levels
+Köster, J., & Rahmann, S. (2012). Snakemake — a scalable bioinformatics workflow engine. *Bioinformatics*, 28(19), 2520–2522. <https://snakemake.readthedocs.io/>
 
-Snakemake Authors. (2024). Snakemake Workflow Management System. https://snakemake.readthedocs.io/
+### Project Citation
 
+For citation of this project, see [`CITATION.cff`](CITATION.cff), or:
 
+```
+Shan, W., & Kim, J. (2026). Financial Literacy and Household Credit Card Debt
+Before and After COVID-19 [Software]. GitHub. https://github.com/oliviawudi/IS477-WJ
+```
 
+## Licenses
+
+- **Code**: MIT License — see [`LICENSE`](LICENSE).
+- **Data**: SHED microdata are U.S. federal public-use files (attribution required, no implied endorsement, no misleading alteration of variable meaning); CFPB data is available under an open public license with attribution required. Neither source's terms permit relicensing the raw data itself — this repository redistributes only derived/cleaned outputs alongside citations back to the originals.
+- **Documentation**: This README and accompanying `docs/` files are licensed under CC-BY-4.0.
