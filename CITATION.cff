@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+message: "If you use this software or its methodology, please cite it as below."
+title: "Financial Literacy and Household Credit Card Debt Before and After COVID-19"
+authors:
+  - family-names: "Shan"
+    given-names: "Wenqi"
+  - family-names: "Kim"
+    given-names: "Jun"
+version: "Final Release 1.0"
+date-released: 2026-01-01
+url: "https://github.com/oliviawudi/IS477-WJ"
+repository-artifact: "https://github.com/oliviawudi/IS477-WJ/releases/tag/final-project"
+license: MIT
+keywords:
+  - financial literacy
+  - household debt
+  - credit cards
+  - COVID-19
+  - SHED
+  - reproducible research
+  - data integration
