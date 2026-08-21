@@ -192,8 +192,6 @@ clean_cfpb ──► cfpb_group ──► cfpb_analysis ────────
 ```
 IS477-WJ/
 ├── data/
-│   ├── raw/                  # gitignored — fetched via pipeline or Box
-│   └── processed/            # gitignored — pipeline outputs
 ├── docs/
 │   ├── data_dictionary.md    # variable-level metadata for all 3 datasets
 │   ├── ProjectPlan.md
