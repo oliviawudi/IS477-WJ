@@ -191,7 +191,6 @@ clean_cfpb ──► cfpb_group ──► cfpb_analysis ────────
 
 ```
 IS477-WJ/
-├── data/
 ├── docs/
 │   ├── data_dictionary.md    # variable-level metadata for all 3 datasets
 │   ├── ProjectPlan.md
